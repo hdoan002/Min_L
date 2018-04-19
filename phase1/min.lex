@@ -1,5 +1,5 @@
-/*
- *
+/* Henry Doan
+ * CS 152 Project Phase 1
  */
 
 %{
@@ -14,7 +14,10 @@ whitespace      [ ]
 underscore      [_]
 hash            ##.*
 
-ident           [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]*
+underFirst      [_][a-zA-Z0-9_]*[a-zA-Z0-9]*
+underLast       [a-zA-Z][a-zA-Z0-9_]*[_]
+digitFirst      [0-9][a-zA-Z0-9_]*[a-zA-Z0-9]*
+ident           [a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*
 
 %%
 "function"      { printf("FUNCTION\n"); currPos += yyleng; }
@@ -65,14 +68,18 @@ ident           [a-zA-Z][a-zA-Z0-9_]*[a-zA-Z0-9]*
 ":="            { printf("ASSIGN\n"); currPos += yyleng; }
 
 {ident}         { printf("IDENT %s\n", yytext); currPos += yyleng; }
-
 {digits}+       { printf("NUMBER %s\n", yytext); currPos += yyleng; }
-
-{hash}         { currPos += yyleng; }
+{hash}          { currPos += yyleng; }
 {tab}+          { currPos += yyleng; }
 {newline}       { currLine++; currPos = 1; }
 {whitespace}+   { currPos += yyleng; }
 
+
+
+
+{underLast}     { printf("Error at line %d, column %d: incorrect identifer (Underscore last) \"%s\"\n", currLine, currPos, yytext); exit(0); }
+{underFirst}    { printf("Error at line %d, column %d: incorrect identifer (Underscore first) \"%s\"\n", currLine, currPos, yytext); exit(0); }
+{digitFirst}    { printf("Error at line %d, column %d: incorrect identifer (Digit first) \"%s\"\n", currLine, currPos, yytext); exit(0); }
 .               { printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", currLine, currPos, yytext); exit(0); }
 
 
