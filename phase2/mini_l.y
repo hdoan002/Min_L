@@ -18,28 +18,132 @@
 
 %error-verbose
 %start program
+
+%token FUNCTION BEGINPARAMS ENDPARAMS BEGINLOCALS ENDLOCALS BEGINBODY ENDBODY INTEGER ARRAY OF IF THEN ENDIF ELSE WHILE DO BEGINLOOP ENDLOOP CONTINUE READ WRITE TRUE FALSE SEMICOLON COLON COMMA LPAREN RPAREN LSQUARE RSQUARE ASSIGN RETURN
 %token MULT DIV MINUS EQUAL L_PAREN R_PAREN END
 %token <int_val> NUMBER
 %type <int_val> exp
-%left PLUS MINUS
-%left MULT DIV
+%left LT LTE GT GTE EQ NEQ
+%left MULT DIV PLUS MINUS
+%right NOT
+%left AND OR
+%right ASSIGN
+
 
 %%
-program:
-
-input:		| input line
+program:	functions
 		;
 
-line:		exp EQUAL END			{printf("\t%d\n", $1);}
+functions:	
+		| function functions
 		;
 
-exp:		NUMBER				{$$ = $1;}
-			| exp PLUS exp		{$$ = $1 + $3;}
-			| exp MINUS exp		{$$ = $1 - $3;}
-			| exp MULT exp		{$$ = $1 * $3;}
-			| exp DIV exp		{if ($3==0) yyerror("divide by zero"); else $$ = $1 / $3;}
-			| L_PAREN exp R_PAREN	{$$ = $2;}
-			;
+function:	FUNCTION IDENTIFIERS SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY
+		;
+
+declarations:	
+		| declaration SEMICOLON declarations
+		;
+
+declaration:	id colon assign
+		;
+
+id:		IDENTIFIERS
+		| IDENTIFIERS COMMA
+		;
+
+assign:		INTEGER {printf("assign -> INTEGER\n");}
+		| ARRAY LSQUARE NUMBERS RSQUARE OF INTEGER {printf("assign -> ARRAY LSQUARE NUMBER %d RSQUARE OF INTEGER\n", $3);}
+		;
+
+statements:	statement SEMICOLON statements
+		| statement SEMICOLON
+		;
+
+statement:	a
+		| b
+		| c
+		| d
+		| e
+		| f
+		| g
+		| h
+		;
+
+boolean_expr:	relation_exprr 
+		| boolean_expr OR relation_exprr 
+		;
+
+relation_exprr:	relation_expr 
+		| relation_exprr AND relation_expr 
+		;
+
+relation_expr:	rexpr 
+		| NOT rexpr 
+		;
+
+rexpr:		expression comp expression 
+		| TRUE 
+		| FALSE 
+		| L_PAREN boolean_expr R_PAREN 
+		;
+
+comp:		EQ 
+		| NEQ 
+		| LT 
+		| GT 
+		| LTE 
+		| GTE 
+		;
+
+expression:	mul_expr expradd 
+		;
+
+expradd:	/*empty*/ 
+		| ADD mul_expr expradd 
+		| SUB mul_expr expradd 
+		;
+
+mul_expr:	term multi_term 
+		;
+
+multi_term:	/*empty*/ 
+		| MULT term multi_term 
+		| DIV term multi_term 
+		| MOD term multi_term 
+		;
+
+term:           posterm 
+                | SUB posterm 
+                | IDENTIFIERS term_iden 
+                ;
+
+posterm:        var 
+                | NUMBERS 
+                | L_PAREN expression R_PAREN 
+                ;
+
+term_iden:      L_PAREN term_ex R_PAREN 
+                | L_PAREN R_PAREN 
+                ;
+
+term_ex:        expression 
+                | expression COMMA term_ex 
+                ;
+
+var:            IDENTIFIERS 
+                | IDENTIFIERS LSQUARE expression RSQUARE  
+                ;
+
+
+input:		
+		| input line
+		;
+
+line:		
+		exp EQUAL END			{printf("\t%d\n", $1);}
+		;
+
 %%
 
 int main(int argc, char **argv) {
