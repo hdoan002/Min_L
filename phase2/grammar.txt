@@ -1,0 +1,136 @@
+/*
+  Henry Doan - hdoan002@ucr.edu
+  Steve Guardado - sguar001@ucr.edu
+  CS152 - Phase 2
+*/
+
+Grammar for Bison Parser Generator
+
+program:
+			/*epsilon*/
+			| functions program
+			;
+
+functions: 
+			/*epsilon*/
+			| function functions
+            		;
+
+function:         
+			FUNCTION IDENT SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY
+			;
+									
+declarations: 
+			/*epsilon*/
+			| declaration SEMICOLON declarations
+			;
+										
+declaration:
+			IDENT identifiers COLON INTEGER 
+			| IDENT identifiers COLON ARRAY L_SQUARE_BRACKET NUMBER R_SQUARE_BRACKET OF INTEGER
+			;
+
+identifiers:
+			/*epsilon*/
+			| COMMA IDENT identifiers
+			;
+
+statements:
+			/*epsilon*/
+			statement SEMICOLON statements
+			| statement SEMICOLON
+			;
+														
+statement:  
+			var ASSIGN expression 
+			| IF bool_exp THEN statements ENDIF
+			| IF bool_exp THEN statements ELSE statements ENDIF 
+			| WHILE bool_exp BEGINLOOP statements ENDLOOP 
+			| DO BEGINLOOP statements ENDLOOP WHILE bool_exp
+			| FOREACH IDENT IN IDENT BEGINLOOP statements ENDLOOP 
+			| READ var vars 
+			| WRITE var vars 
+			| CONTINUE 
+			| RETURN expression 
+                  
+	                  
+bool_exp:
+			relation_and_exp 
+			| bool_exp OR relation_and_exp
+			;
+                  
+relation_and_exp:
+			relation_exp1
+			| relation_and_exp AND relation_exp1
+			;
+
+                  
+relation_exp1:
+			relation_exp2
+			| NOT relation_exp2
+			; 
+                  
+relation_exp2:  
+			expression comp expression
+			| TRUE 
+			| FALSE 
+			| L_PAREN bool_exp R_PAREN
+			; 
+                  
+comp:
+			EQ 
+			| NEQ 
+			| LT 
+			| GT 
+			| LTE 
+			| GTE
+			;
+	                  
+expression:
+			multiplicative_exp addition_exp
+			;      
+		  
+addition_exp:	
+			/*epsilon*/
+			| ADD multiplicative_exp addition_exp 
+			| SUB multiplicative_exp addition_exp
+			; 
+                  
+multiplicative_exp: 
+			term multi_term
+			;
+	                  
+multi_term:
+			/*epsilon*/
+			| MOD term multi_term
+			| DIV term multi_term
+			| MULT term multi_term
+			; 
+                  
+term: 
+			posterm  
+			| SUB posterm
+			| IDENT L_PAREN R_PAREN 
+			| IDENT L_PAREN expression expressions R_PAREN
+			; 
+	
+posterm:        
+			var
+			| NUMBER
+			| L_PAREN expression R_PAREN
+			;
+	
+expressions:
+			/*epsilon*/
+			| expression COMMA expressions
+			;
+                  
+var: 
+			IDENT
+			| IDENT L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+			;
+          
+vars:
+			/*epsilon*/
+			| COMMA var vars
+			;

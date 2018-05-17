@@ -1,8 +1,7 @@
 /*
-  Henry Doan
+  Henry Doan - hdoan002@ucr.edu
   Steve Guardado - sguar001@ucr.edu
   CS152 - Phase 2
-
 */
 
 %{
@@ -36,12 +35,12 @@ IDENT		[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*
 ">="			{currPos += yyleng; return GTE;}
 
 "function"		{currPos += yyleng; return FUNCTION;}
-"beginparams"		{currPos += yyleng; return BEGIN_PARAMS;}
-"endparams"		{currPos += yyleng; return END_PARAMS;}
-"beginlocals"		{currPos += yyleng; return BEGIN_LOCALS;}
-"endlocals"		{currPos += yyleng; return END_LOCALS;}
-"beginbody"		{currPos += yyleng; return BEGIN_BODY;}
-"endbody"		{currPos += yyleng; return END_BODY;}
+"beginparams"		{currPos += yyleng; return BEGINPARAMS;}
+"endparams"		{currPos += yyleng; return ENDPARAMS;}
+"beginlocals"		{currPos += yyleng; return BEGINLOCALS;}
+"endlocals"		{currPos += yyleng; return ENDLOCALS;}
+"beginbody"		{currPos += yyleng; return BEGINBODY;}
+"endbody"		{currPos += yyleng; return ENDBODY;}
 "integer"		{currPos += yyleng; return INTEGER;}
 "array"			{currPos += yyleng; return ARRAY;}
 "of"			{currPos += yyleng; return OF;}
@@ -80,7 +79,7 @@ IDENT		[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*
 
 {DIGIT}+		{yylval.int_val = atoi(yytext); currPos += yyleng; return NUMBER;}
 
-{IDENT}			{currPos += yyleng; yylval.token_val = yytext; return IDENT;}
+{IDENT}			{currPos += yyleng; yylval.token_val = strdup(yytext); return IDENT;}
 
 {INVALIDSTART}		{printf("Error at line %d, column %d: invalid IDENT \"%s\"\n", currLine, currPos, yytext); exit(0);}
 
@@ -88,5 +87,5 @@ IDENT		[a-zA-Z]([a-zA-Z0-9_]*[a-zA-Z0-9])*
 
 [#][#].*		{currLine += 1; currPos = 1;}
 
-.			 {printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", currLine, currPos, yytext); exit(0);}
+.			{printf("Error at line %d, column %d: unrecognized symbol \"%s\"\n", currLine, currPos, yytext); exit(0);}
 %%

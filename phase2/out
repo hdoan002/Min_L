@@ -1,0 +1,357 @@
+declarations -> epsilon
+identifiers -> epsilon
+** Line 26, position 11: syntax error, unexpected INTEGER, expecting COLON
+** Line 27, position 2: syntax error, unexpected IDENT, expecting SEMICOLON
+** Line 27, position 4: syntax error, unexpected COLON, expecting SEMICOLON
+** Line 27, position 14: syntax error, unexpected IDENT, expecting SEMICOLON
+** Line 27, position 15: syntax error, unexpected R_SQUARE_BRACKET, expecting SEMICOLON
+** Line 27, position 18: syntax error, unexpected OF, expecting SEMICOLON
+** Line 27, position 26: syntax error, unexpected INTEGER, expecting SEMICOLON
+identifiers -> epsilon
+identifiers -> identifier COMMA identifiers
+declaration -> IDENT identifiers COLON INTEGER
+identifiers -> epsilon
+identifiers -> identifier COMMA identifiers
+declaration -> IDENT identifiers COLON INTEGER
+declarations -> epsilon
+declarations -> declaration SEMICOLON declarations
+declarations -> declaration SEMICOLON declarations
+declarations -> declaration SEMICOLON declarations
+var -> IDENT n
+vars -> epsilon
+statement -> READ vars
+var -> IDENT x
+var -> IDENT n
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT x
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> GT
+var -> IDENT n
+posterm -> var
+term -> posterm
+var -> IDENT x
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+mult_term -> DIV term multi_term
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT x
+var -> IDENT x
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+var -> IDENT n
+posterm -> var
+term -> posterm
+var -> IDENT x
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+mult_term -> DIV term multi_term
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+posterm -> L_PAREN expression R_PAREN
+term -> posterm
+posterm -> NUMBER 2
+term -> posterm
+multi_term -> epsilon
+mult_term -> DIV term multi_term
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+statement -> WHILE bool_exp BEGINLOOP statements ENDLOOP
+var -> IDENT sqrt_n
+var -> IDENT x
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT i
+posterm -> NUMBER 2
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> LTE
+var -> IDENT n
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+var -> IDENT L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+posterm -> NUMBER 0
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT i
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+posterm -> NUMBER 1
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+statement -> WHILE bool_exp BEGINLOOP statements ENDLOOP
+var -> IDENT i
+posterm -> NUMBER 2
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> LTE
+var -> IDENT sqrt_n
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+var -> IDENT L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> EQ
+posterm -> NUMBER 0
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT j
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT j
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> LTE
+var -> IDENT n
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT j
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+var -> IDENT L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+posterm -> NUMBER 1
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT j
+var -> IDENT j
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+statement -> WHILE bool_exp BEGINLOOP statements ENDLOOP
+statement -> IF bool_exp THEN statements ENDIF
+var -> IDENT i
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+posterm -> NUMBER 1
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+statement -> WHILE bool_exp BEGINLOOP statements ENDLOOP
+var -> IDENT i
+posterm -> NUMBER 2
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> LTE
+var -> IDENT n
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+var -> IDENT L_SQUARE_BRACKET expression R_SQUARE_BRACKET
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+comp -> EQ
+posterm -> NUMBER 0
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp addition_exp
+relation_exp -> expression comp expression
+relation_exp -> relation_exp
+relation_and_exp -> relation_exp
+bool_exp -> relation_and_exp
+var -> IDENT i
+vars -> epsilon
+statement -> WRITE vars
+statement -> IF bool_exp THEN statements ENDIF
+var -> IDENT i
+var -> IDENT i
+posterm -> var
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+posterm -> NUMBER 1
+term -> posterm
+multi_term -> epsilon
+multiplicative_exp -> term
+addition_exp -> epsilon
+expression -> multiplicative_exp ADD multiplicative_exp
+expression -> multiplicative_exp addition_exp
+statement -> var ASSIGN expression
+statement -> WHILE bool_exp BEGINLOOP statements ENDLOOP
+function-> FUNCTION IDENT SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY
+functions -> epsilon
+functions -> function functions
+program -> functions
